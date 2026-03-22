@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🧠 Feliz Hub</title>
+  <title>🧠 TDA Hub</title>
   <style>
     /* ============================================================
        CSS DESIGN SYSTEM — PROMPT 6
@@ -1193,7 +1193,7 @@
   <!-- ===== TOP BAR ===== -->
   <header class="topbar">
     <div class="topbar-logo">
-      <span>🧠</span> Unified Hub
+      <span>🧠</span> TDA Hub
     </div>
     <div class="topbar-search-wrap">
       <span class="search-icon">🔍</span>
@@ -1241,7 +1241,7 @@
         <div class="module-panel active" id="panel-welcome">
           <div class="welcome-screen">
             <div>
-              <div class="welcome-title">🧠 Feliz Hub</div>
+              <div class="welcome-title">🧠 TDA Hub</div>
               <div class="welcome-sub">Tất cả công cụ quản lý trong một giao diện duy nhất.<br/>Chọn module bên dưới để bắt đầu.</div>
             </div>
             <div class="module-grid" id="welcomeModuleGrid"></div>
@@ -2212,7 +2212,7 @@ const ChatbotSystem = {
     // Welcome message nếu chưa có
     if (!this.conversations.length) {
       this._addMessageToDOM('assistant',
-        '👋 Xin chào! Tôi là AI Assistant tích hợp trong **Feliz Hub**.\n\n' +
+        '👋 Xin chào! Tôi là AI Assistant tích hợp trong **TDA Hub**.\n\n' +
         'Tôi có thể giúp bạn:\n' +
         '- 📋 Quản lý tasks và lịch trình\n' +
         '- 📊 Phân tích dữ liệu từ tất cả modules\n' +
@@ -2310,7 +2310,7 @@ const ChatbotSystem = {
 
   // ===== Build System Prompt với dữ liệu từ các modules =====
   buildSystemPrompt() {
-    let systemPrompt = `Bạn là AI Assistant được tích hợp trong Feliz Hub — một ứng dụng quản lý cá nhân đa chức năng.
+    let systemPrompt = `Bạn là AI Assistant được tích hợp trong TDA Hub — một ứng dụng quản lý cá nhân đa chức năng.
 Hôm nay là: ${new Date().toLocaleDateString('vi-VN', { weekday:'long', year:'numeric', month:'long', day:'numeric' })}.
 
 `;
@@ -3088,7 +3088,7 @@ const NotesModule = {
     this.data = this._load();
     if (!this.data.length) {
       this.data = [
-        { id: this._uid(), title: 'Chào mừng đến Notes!', content: '# Unified Hub Notes\n\nĐây là module ghi chú của bạn. Hỗ trợ **Markdown** đầy đủ.\n\n## Tính năng\n- Rich text editor\n- Auto-save mỗi 2 giây\n- Tìm kiếm toàn văn\n- Tags tổ chức\n\n> Bắt đầu ghi chú ngay!', tags: ['welcome'], pinned: true, createdAt: Date.now(), updatedAt: Date.now() },
+        { id: this._uid(), title: 'Chào mừng đến Notes!', content: '# TDA Hub Notes\n\nĐây là module ghi chú của bạn. Hỗ trợ **Markdown** đầy đủ.\n\n## Tính năng\n- Rich text editor\n- Auto-save mỗi 2 giây\n- Tìm kiếm toàn văn\n- Tags tổ chức\n\n> Bắt đầu ghi chú ngay!', tags: ['welcome'], pinned: true, createdAt: Date.now(), updatedAt: Date.now() },
         { id: this._uid(), title: 'Ideas & Brainstorm', content: '## Ý tưởng mới\n\n- [ ] Idea 1\n- [ ] Idea 2\n- [x] Idea 3 (đã thực hiện)', tags: ['ideas','creative'], pinned: false, createdAt: Date.now()-86400000, updatedAt: Date.now()-3600000 },
         { id: this._uid(), title: 'Meeting Notes 20/03', content: '## Cuộc họp team\n\n**Thời gian:** 9:00 - 10:00\n**Địa điểm:** Phòng họp A\n\n### Action Items\n- [ ] Cập nhật tài liệu\n- [ ] Gửi email follow-up', tags: ['work','meeting'], pinned: false, createdAt: Date.now()-172800000, updatedAt: Date.now()-7200000 },
       ];
@@ -5716,7 +5716,7 @@ const DataManager = {
     const blob = new Blob([JSON.stringify(allData, null, 2)], {type:'application/json'});
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url; a.download = `unified-hub-backup-${Date.now()}.json`; a.click();
+    a.href = url; a.download = `tda-hub-backup-${Date.now()}.json`; a.click();
     URL.revokeObjectURL(url);
     UI.toast('✅ Đã xuất toàn bộ dữ liệu!', 'success');
   },
@@ -5893,7 +5893,7 @@ async function initApp() {
 
   // 17. Thông báo sẵn sàng
   setTimeout(() => {
-    UI.toast('🧠 Unified Hub sẵn sàng!', 'success', 2000);
+    UI.toast('🧠 TDA Hub sẵn sàng!', 'success', 2000);
   }, 500);
 
   // 18. Request notification permission (cho Pomodoro)
@@ -5901,7 +5901,7 @@ async function initApp() {
     setTimeout(() => Notification.requestPermission(), 3000);
   }
 
-  console.log('✅ Feliz Hub khởi động thành công!');
+  console.log('✅ TDA Hub khởi động thành công!');
   console.log('📦 Modules đã đăng ký:', ModuleRegistry.getAllModules().map(m=>m.name).join(', '));
 }
 
