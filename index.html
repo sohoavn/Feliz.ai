@@ -76,6 +76,13 @@
     ::-webkit-scrollbar-thumb{background:var(--border-active);border-radius:10px}
     button{cursor:pointer;border:none;outline:none;background:none;font-family:inherit}
     input,textarea,select{font-family:inherit;outline:none}
+    @media(max-width:768px){
+      input,textarea,select{font-size:16px!important}
+      .btn{min-height:44px;min-width:44px}
+      .btn-icon{width:36px;height:36px}
+      .topbar-btn{width:36px;height:36px}
+      .nav-item{min-height:44px}
+    }
     a{color:var(--accent-cyan);text-decoration:none}
 
     /* ===== LAYOUT ===== */
@@ -1070,266 +1077,159 @@
     .pulse{animation:pulse 1.5s infinite}
 
     /* ============================================================
-      MOBILE RESPONSIVE FIX - TOÀN DIỆN
-      ============================================================ */
-
-    /* --- TABLET (768-1200px) --- */
+       RESPONSIVE — PROMPT 6
+    ============================================================ */
     @media(max-width:1200px){
       .sidebar{width:var(--sidebar-collapsed)}
       .sidebar .nav-item-label,.sidebar .sidebar-section-title,
       .sidebar .tag-cloud-wrap,.sidebar .nav-item-badge{display:none}
       .kanban-board{grid-template-columns:repeat(2,1fr)}
-      .calendar-layout{flex-direction:column}
-      .calendar-sidebar-panel{width:100%}
-      .notes-layout{flex-direction:column}
-      .notes-sidebar{width:100%;max-height:160px}
     }
-
-    /* --- MOBILE (≤768px) --- */
     @media(max-width:768px){
-      :root{
-        --sidebar-width:100%;
-        --chatbot-width:100vw;
-        --topbar-height:48px;
-      }
-
-      /* TOP BAR compact */
-      .topbar{padding:0 var(--space-sm);gap:var(--space-sm)}
-      .topbar-logo{min-width:auto;font-size:14px}
-      .topbar-logo span{font-size:18px}
-      .topbar-search-wrap{display:none} /* Search qua Ctrl+K hoặc button */
-      .topbar-actions{gap:2px}
-      .topbar-btn{width:32px;height:32px;font-size:15px}
-
-      /* SIDEBAR → Bottom Navigation Bar */
-      .sidebar{
-        position:fixed !important;
-        bottom:0;left:0;right:0;
-        width:100% !important;
-        height:56px !important;
-        flex-direction:row !important;
-        overflow-x:auto !important;
-        overflow-y:hidden !important;
-        z-index:200;
-        border-right:none !important;
-        border-top:1px solid var(--border);
-        padding:0 !important;
-      }
-      .sidebar.collapsed{width:100% !important;height:56px !important}
-      .sidebar .sidebar-section{
-        display:flex !important;
-        flex-direction:row !important;
-        padding:0 var(--space-xs) !important;
-        align-items:center;
-        gap:0;
-        flex:1;
-        overflow-x:auto;
-      }
-      .sidebar .sidebar-section-title{display:none !important}
-      .sidebar .sidebar-footer{display:none !important}
-      .sidebar .tag-cloud-wrap{display:none !important}
-      #navItems{
-        display:flex !important;
-        flex-direction:row !important;
-        gap:2px;
-        align-items:center;
-        overflow-x:auto;
-        padding:4px 0;
-      }
-      .nav-item{
-        flex-direction:column !important;
-        padding:4px 8px !important;
-        gap:2px !important;
-        min-width:52px;
-        flex-shrink:0;
-        align-items:center !important;
-        justify-content:center;
-        border-radius:var(--radius-sm) !important;
-      }
-      .nav-item-icon{font-size:20px !important}
-      .nav-item-label{
-        display:block !important;
-        font-size:9px !important;
-        white-space:nowrap;
-        text-align:center;
-      }
-      .nav-item-badge{
-        display:none !important;
-      }
-
-      /* BODY AREA */
-      .body-area{flex-direction:column}
-      .workspace{padding-bottom:56px}
-      
-      /* TAB BAR */
-      .tab-bar{height:36px;padding:0 4px}
-      .workspace-tab{padding:0 8px;height:28px;font-size:12px}
-
-      /* MODULE PANELS */
-      .module-panel{padding:var(--space-sm)}
-
-      /* KANBAN → Horizontal scroll hoặc Tab view */
-      .kanban-board{
-        display:flex !important;
-        overflow-x:auto !important;
-        scroll-snap-type:x mandatory;
-        gap:var(--space-sm);
-        height:auto !important;
-        padding-bottom:var(--space-sm);
-      }
-      .kanban-col{
-        min-width:280px;
-        flex-shrink:0;
-        scroll-snap-align:start;
-        max-height:60vh;
-      }
-
-      /* CALENDAR */
-      .calendar-layout{flex-direction:column !important}
-      .calendar-main{width:100%}
-      .calendar-sidebar-panel{width:100% !important}
-      .cal-day{min-height:48px !important;padding:2px !important}
-      .cal-day-num{font-size:11px !important}
-      .cal-event-chip{font-size:8px !important;padding:0 2px !important}
-
-      /* NOTES */
-      .notes-layout{flex-direction:column !important;height:auto !important}
-      .notes-sidebar{
-        width:100% !important;
-        max-height:120px;
-        border-radius:var(--radius-md) !important;
-        flex-shrink:0;
-      }
-      .note-editor-wrap{min-height:50vh}
-      .note-editor,.note-editor textarea,
-      #note-content-textarea{min-height:200px !important;font-size:14px !important}
-
-      /* BUDGET */
-      .budget-summary{grid-template-columns:1fr !important}
-      .budget-stat-card{padding:var(--space-sm) !important}
-      .budget-stat-value{font-size:18px !important}
-      .transaction-item{padding:var(--space-xs) var(--space-sm) !important;gap:var(--space-sm)}
-
-      /* HABIT */
-      .habit-row{padding:var(--space-sm) !important}
-      .heatmap-cell{width:10px !important;height:10px !important}
-
-      /* BOOKMARKS */
-      .bookmarks-grid{grid-template-columns:1fr !important}
-      .bookmark-thumb{height:60px}
-
-      /* DATABASE */
-      .db-table-wrap{overflow-x:auto !important;-webkit-overflow-scrolling:touch}
-      .db-table{min-width:600px}
-
-      /* POMODORO */
-      .pomodoro-center{padding:var(--space-sm)}
-      .pomodoro-ring{width:180px !important;height:180px !important}
-      .pomodoro-ring svg{width:180px !important;height:180px !important}
-      .pomodoro-time-val{font-size:36px !important}
-      .pomodoro-stats{flex-wrap:wrap}
-      .pom-stat{min-width:80px}
-
-      /* MODAL FIX - quan trọng nhất */
-      .modal{
-        min-width:auto !important;
-        max-width:calc(100vw - 16px) !important;
-        width:calc(100vw - 16px) !important;
-        max-height:85vh !important;
-        margin:8px;
-      }
-      .modal-body{padding:var(--space-md) !important}
-      .form-row{flex-direction:column !important;gap:var(--space-sm) !important}
-
-      /* CHATBOT */
-      #chatbotPanel{
-        position:fixed !important;
-        bottom:56px !important;
-        right:0 !important;left:0 !important;
-        width:100vw !important;
-        height:calc(100vh - var(--topbar-height) - 56px) !important;
-        border-radius:0 !important;
-      }
-      #chatbotPanel.maximized{
-        bottom:56px !important;
-        height:calc(100vh - var(--topbar-height) - 56px) !important;
-      }
-      #chatbotToggle{
-        bottom:64px !important;
-        right:12px !important;
-        width:46px;height:46px;
-        font-size:20px;
-      }
-      .message-bubble{max-width:90% !important}
-      .suggestions-bar{padding:4px var(--space-sm)}
-      .suggestion-chip{font-size:10px;padding:3px 8px}
-      #chatInput{font-size:16px !important} /* Prevent iOS zoom */
-
-      /* WELCOME SCREEN */
-      .module-grid{grid-template-columns:repeat(2,1fr) !important;gap:var(--space-sm) !important}
-      .module-card-btn{padding:var(--space-sm) !important}
-      .module-card-btn .icon{font-size:24px !important}
-      .module-card-btn .name{font-size:12px !important}
-      .module-card-btn .desc{display:none}
-
-      /* SETTINGS MODAL */
-      .model-grid{grid-template-columns:1fr !important}
-      .settings-tabs{overflow-x:auto;flex-wrap:nowrap}
-      .settings-tab{white-space:nowrap;padding:8px 12px;font-size:12px}
-
-      /* STATUS BAR */
-      .statusbar{
-        display:none !important; /* Ẩn trên mobile - thông tin chuyển vào Settings */
-      }
-
-      /* Search Modal cho mobile (thêm nút search trên topbar) */
-      .topbar-search-mobile{
-        display:flex !important;
-      }
-
-      /* TOAST */
-      #toastContainer{
-        top:auto;bottom:64px;right:8px;left:8px;
-        align-items:stretch;
-      }
-      .toast{min-width:auto;max-width:100%}
+    :root{--sidebar-width:0px;--chatbot-width:100vw}
+    
+    /* === MOBILE BOTTOM NAV === */
+    .sidebar{
+      position:fixed;bottom:0;left:0;right:0;
+      width:100%!important;height:auto;min-height:56px;
+      flex-direction:column;
+      z-index:200;border-right:none;border-top:1px solid var(--border);
+      background:var(--bg-secondary);
+      backdrop-filter:var(--glass-blur);
     }
+    .sidebar .sidebar-section:first-child{
+      display:block!important;padding:0!important;
+    }
+    .sidebar .sidebar-section:first-child .sidebar-section-title{display:none}
+    .sidebar .sidebar-section:not(:first-child),
+    .sidebar .sidebar-footer,
+    .sidebar .tag-cloud-wrap{display:none}
+    #navItems{
+      display:flex!important;flex-direction:row!important;
+      overflow-x:auto;gap:2px;padding:6px 8px;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    #navItems::-webkit-scrollbar{display:none}
+    #navItems .nav-item{
+      flex-direction:column;gap:2px;
+      padding:6px 10px;min-width:60px;
+      text-align:center;font-size:11px;
+      border-radius:var(--radius-sm);
+      flex-shrink:0;
+    }
+    #navItems .nav-item .nav-item-icon{font-size:20px;width:auto}
+    #navItems .nav-item .nav-item-label{
+      display:block!important;font-size:10px;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      max-width:56px;
+    }
+    #navItems .nav-item .nav-item-badge{
+      display:inline-flex!important;
+      position:absolute;top:2px;right:2px;
+      font-size:8px;padding:0 4px;min-width:14px;
+    }
+    
+    /* === MOBILE WORKSPACE === */
+    .body-area{flex-direction:column}
+    .workspace{padding-bottom:70px}
+    
+    /* === MOBILE TOPBAR === */
+    .topbar{padding:0 8px;gap:8px}
+    .topbar-logo{min-width:auto;font-size:14px}
+    .topbar-logo span{font-size:18px}
+    .topbar-search-wrap{display:block!important;flex:1}
+    #globalSearch{font-size:12px;padding:6px 30px 6px 30px}
+    .search-kbd{display:none}
+    
+    /* === MOBILE CHATBOT === */
+    #chatbotPanel{
+      bottom:56px;right:0;left:0;top:auto;
+      width:100%;height:calc(100vh - var(--topbar-height) - 56px);
+      border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    #chatbotToggle{bottom:66px;right:12px;width:44px;height:44px;font-size:18px}
+    
+    /* === MOBILE MODALS === */
+    .modal{
+      min-width:auto!important;width:95vw!important;
+      max-height:85vh;margin:auto;
+      border-radius:var(--radius-md);
+    }
+    .modal-body{padding:var(--space-md)}
+    .modal-header,.modal-footer{padding:var(--space-sm) var(--space-md)}
+    
+    /* === MOBILE KANBAN === */
+    .kanban-board{
+      grid-template-columns:1fr;
+      height:auto!important;max-height:none;
+    }
+    .kanban-col{max-height:300px}
+    
+    /* === MOBILE BUDGET === */
+    .budget-summary{grid-template-columns:1fr 1fr 1fr;gap:8px}
+    .budget-stat-card{padding:8px}
+    .budget-stat-value{font-size:16px}
+    .budget-stat-label{font-size:9px}
+    
+    /* === MOBILE NOTES === */
+    .notes-layout{flex-direction:column}
+    .notes-sidebar{width:100%;height:160px;border-radius:var(--radius-md)}
+    .note-editor-wrap{min-height:300px}
+    
+    /* === MOBILE CALENDAR === */
+    .calendar-layout{flex-direction:column}
+    .calendar-sidebar-panel{width:100%;order:-1}
+    .cal-day{min-height:50px;padding:2px}
+    .cal-day-num{font-size:11px}
+    .cal-event-chip{font-size:8px;padding:1px 2px}
+    
+    /* === MOBILE DATABASE === */
+    .db-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .db-table{min-width:600px}
+    
+    /* === MOBILE HABITS === */
+    .heatmap-cell{width:10px;height:10px}
+    .habit-row{padding:var(--space-sm)}
+    
+    /* === MOBILE BOOKMARKS === */
+    .bookmarks-grid{grid-template-columns:1fr}
+    
+    /* === MOBILE FORM === */
+    .form-row{flex-direction:column;gap:0}
+    .form-input,.form-textarea,.form-select{font-size:16px!important}
+    
+    /* === MOBILE MODEL GRID === */
+    .model-grid{grid-template-columns:1fr}
+    
+    /* === MOBILE TAB BAR === */
+    .tab-bar{padding:0 4px}
+    .workspace-tab{padding:0 8px;font-size:12px}
+    
+    /* === MOBILE SETTINGS TABS === */
+    .settings-tabs{overflow-x:auto;flex-wrap:nowrap}
+    .settings-tab{white-space:nowrap;flex-shrink:0;font-size:12px;padding:8px 12px}
+    
+    /* === MOBILE POMODORO === */
+    .pomodoro-ring{width:160px!important;height:160px!important}
+    .pomodoro-time-val{font-size:32px!important}
+    .pomodoro-center{gap:var(--space-md)}
+    .pomodoro-stats{flex-wrap:wrap;gap:8px}
+  }
 
-    /* --- SMALL PHONES (≤480px) --- */
+  /* === EXTRA SMALL PHONES === */
+  @media(max-width:380px){
+    .topbar-search-wrap{display:none!important}
+    .topbar-actions{gap:2px}
+    .topbar-btn{width:30px;height:30px;font-size:15px}
+    #navItems .nav-item{min-width:50px;padding:4px 6px}
+    #navItems .nav-item .nav-item-label{font-size:9px;max-width:46px}
+    .budget-summary{grid-template-columns:1fr}
+  }
     @media(max-width:480px){
-      .topbar-logo span{display:none}
-      .kanban-col{min-width:calc(100vw - 32px)}
-      .cal-grid{font-size:10px}
-      .welcome-title{font-size:20px !important}
-      .welcome-sub{font-size:13px !important}
-      .module-grid{grid-template-columns:repeat(2,1fr) !important}
-      .tab-bar{overflow-x:auto}
-      .workspace-tab{font-size:11px;padding:0 6px}
-    }
-
-    /* Touch improvements */
-    @media(hover:none) and (pointer:coarse){
-      .nav-item,.workspace-tab,.btn,.task-card,
-      .note-item,.bookmark-card,.todo-list-item,
-      .transaction-item,.habit-check-btn,.cal-day{
-        -webkit-tap-highlight-color:transparent;
-        touch-action:manipulation;
-      }
-      .task-card{padding:var(--space-md) !important}
-      .btn{min-height:40px}
-      .btn-sm{min-height:34px}
-      .btn-icon{min-width:36px;min-height:36px}
-      .form-input,.form-textarea,.form-select{
-        font-size:16px !important; /* Prevent iOS auto-zoom */
-        min-height:40px;
-      }
-      .habit-check-btn{width:44px !important;height:44px !important}
-    }
-
-    /* --- Search cho mobile trên topbar --- */
-    .topbar-search-mobile{display:none !important}
-    @media(max-width:768px){
-      .topbar-search-mobile{display:flex !important}
+      .topbar-search-wrap{display:none}
+      .pomodoro-ring{width:160px;height:160px}
+      .pomodoro-time-val{font-size:32px}
     }
 
     /* ============================================================
@@ -1412,94 +1312,7 @@
     .flex{display:flex}.flex-1{flex:1}.items-center{align-items:center}.gap-sm{gap:var(--space-sm)}
     .mt-sm{margin-top:var(--space-sm)}.mt-md{margin-top:var(--space-md)}
     .text-muted{color:var(--text-muted)}.text-sm{font-size:12px}
-
-    /* ============================================================
-   MODULE: POMODORO (CSS thiếu)
-   ============================================================ */
-.pomodoro-center{
-  display:flex;flex-direction:column;align-items:center;
-  gap:var(--space-lg);padding:var(--space-md) 0;
-}
-.pomodoro-ring{
-  width:200px;height:200px;position:relative;
-  display:flex;align-items:center;justify-content:center;
-}
-.pomodoro-ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
-.pomodoro-ring circle{
-  fill:none;stroke-width:6;
-  stroke:var(--border);
-}
-.pomodoro-ring .progress-ring{
-  stroke:var(--accent-cyan);
-  stroke-linecap:round;
-  transition:stroke-dashoffset .5s ease;
-}
-.pomodoro-ring.break .progress-ring{stroke:var(--accent-green)}
-.pomodoro-time{text-align:center;z-index:1}
-.pomodoro-time-val{font-size:42px;font-weight:700;font-family:var(--font-mono);color:var(--text-primary)}
-.pomodoro-time-label{font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em}
-.pomodoro-controls{display:flex;gap:var(--space-md);align-items:center}
-.pomodoro-btn{
-  width:44px;height:44px;border-radius:var(--radius-full);
-  background:var(--bg-hover);border:1px solid var(--border);
-  color:var(--text-secondary);font-size:18px;
-  display:flex;align-items:center;justify-content:center;
-  transition:all var(--transition-fast);cursor:pointer;
-}
-.pomodoro-btn:hover{background:var(--bg-card);color:var(--text-primary);border-color:var(--border-active)}
-.pomodoro-btn.primary{
-  width:56px;height:56px;font-size:22px;
-  background:var(--gradient-primary);color:#fff;border:none;
-  box-shadow:var(--glow-cyan);
-}
-.pomodoro-btn.primary:hover{filter:brightness(1.1);transform:scale(1.05)}
-.pomodoro-sessions{display:flex;gap:6px;align-items:center}
-.session-dot{
-  width:12px;height:12px;border-radius:50%;
-  background:var(--bg-hover);border:2px solid var(--border);
-  transition:all var(--transition-fast);
-}
-.session-dot.done{background:var(--accent-cyan);border-color:var(--accent-cyan)}
-.session-dot.active{border-color:var(--accent-yellow);background:var(--accent-yellow)}
-.pomodoro-stats{
-  display:flex;gap:var(--space-xl);text-align:center;
-  margin-top:var(--space-md);
-}
-.pom-stat-val{font-size:24px;font-weight:700;color:var(--accent-cyan)}
-.pom-stat-label{font-size:11px;color:var(--text-muted);text-transform:uppercase}
-.pom-log-item{
-  display:flex;align-items:center;gap:var(--space-sm);
-  padding:var(--space-sm) var(--space-md);
-  background:var(--bg-card);border:1px solid var(--border);
-  border-radius:var(--radius-md);margin-bottom:var(--space-xs);
-  font-size:13px;
-}
-
-/* ============================================================
-   MODULE: DATABASE TABLE (CSS thiếu)
-   ============================================================ */
-.db-table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius-md)}
-.db-table{width:100%;border-collapse:collapse;font-size:13px}
-.db-table th,.db-table td{
-  padding:8px 12px;border-bottom:1px solid var(--border);
-  text-align:left;white-space:nowrap;
-}
-.db-table th{
-  background:var(--bg-secondary);color:var(--text-secondary);
-  font-size:12px;font-weight:600;text-transform:uppercase;
-  letter-spacing:.03em;position:sticky;top:0;z-index:1;
-}
-.db-table tr:hover{background:var(--bg-hover)}
-.db-table td[contenteditable]:focus{
-  outline:2px solid var(--border-active);
-  outline-offset:-2px;border-radius:2px;
-}
-.col-sort{cursor:pointer;user-select:none}
-.col-sort:hover{color:var(--accent-cyan)}
-.db-toolbar{margin-bottom:var(--space-md)}
-
-</style>
-
+  </style>
 </head>
 <body>
 <div id="app">
@@ -1514,14 +1327,11 @@
       <input type="text" id="globalSearch" placeholder="Tìm kiếm mọi thứ... (Ctrl+K)" autocomplete="off" />
       <span class="search-kbd">Ctrl+K</span>
       <div id="searchDropdown"></div>
-      <button class="topbar-btn topbar-search-mobile" id="btnMobileSearch" 
-        title="Tìm kiếm" style="display:none" 
-        onclick="document.getElementById('globalSearch').closest('.topbar-search-wrap').style.display='block';document.getElementById('globalSearch').focus()">🔍</button>
     </div>
-    
     <div class="topbar-actions">
-      <button class="topbar-btn" id="btnTagBrowser" title="Tag Browser">🏷️</button>
-      <button class="topbar-btn" id="btnSettings" title="Cài đặt API & Models">⚙️</button>
+      <button class="topbar-btn" id="btnMobileSearch" title="Tìm kiếm" style="display:none" onclick="document.getElementById('globalSearch').focus();document.getElementById('globalSearch').parentElement.style.display='block'">🔍</button>
+      <button class="topbar-btn" id="btnTagBrowser" title="Tag Browser">🏷</button>
+      <button class="topbar-btn" id="btnSettings" title="Cài đặt API & Models">⚙</button>
       <button class="topbar-btn" id="btnThemeToggle" title="Toggle Dark/Light mode">🌙</button>
     </div>
   </header>
@@ -1693,7 +1503,8 @@
           <label class="form-label">Dữ liệu</label>
           <div style="display:flex;gap:var(--space-sm)">
             <button class="btn btn-secondary" onclick="DataManager.exportAll()">📤 Xuất tất cả dữ liệu</button>
-            <button class="btn btn-danger" onclick="DataManager.clearAll()">🗑️ Xóa tất cả dữ liệu</button>
+            <button class="btn btn-secondary" onclick="DataManager.importAll()">📥 Nhập dữ liệu backup</button>
+            <button class="btn btn-danger" onclick="DataManager.clearAll()">🗑 Xóa tất cả dữ liệu</button>
           </div>
         </div>
       </div>
@@ -3389,25 +3200,7 @@ const TodoModule = {
   _futureDate(days) { const d=new Date(); d.setDate(d.getDate()+days); return d.toISOString().split('T')[0]; },
   _pastDate(days) { const d=new Date(); d.setDate(d.getDate()-days); return d.toISOString().split('T')[0]; },
   _save() { localStorage.setItem('module_todo', JSON.stringify(this.data)); },
-  _load() { try { return JSON.parse(localStorage.getItem('module_todo')) || []; } catch(e) { return []; } },
-
-// ===== FIX: _bindDragDrop - thiếu hoàn toàn trong code gốc =====
-_bindDragDrop() {
-    const cols = document.querySelectorAll('.kanban-col-body');
-    cols.forEach(col => {
-        col.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            col.classList.add('drag-over');
-        });
-        col.addEventListener('dragleave', () => {
-            col.classList.remove('drag-over');
-        });
-        col.addEventListener('drop', (e) => {
-            e.preventDefault();
-            col.classList.remove('drag-over');
-        });
-    });
-}
+  _load() { try { return JSON.parse(localStorage.getItem('module_todo')) || []; } catch(e) { return []; } }
 };
 
 // ===== MODULE 2: NOTES & KNOWLEDGE BASE =====
@@ -6057,6 +5850,43 @@ const DataManager = {
     UI.toast('✅ Đã xuất toàn bộ dữ liệu!', 'success');
   },
 
+  importAll() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        try {
+          const allData = JSON.parse(ev.target.result);
+          if (!allData._meta) {
+            UI.toast('File không hợp lệ! Cần file backup từ TDA Hub.', 'error');
+            return;
+          }
+          UI.confirm('🔄 Khôi phục dữ liệu?', 
+            'Dữ liệu hiện tại sẽ bị ghi đè bởi bản backup. Tiếp tục?', 
+            () => {
+              ModuleRegistry.getAllModules().forEach(m => {
+                if (allData[m.id]) {
+                  m.data = allData[m.id];
+                  try { localStorage.setItem('module_' + m.id, JSON.stringify(m.data)); } catch(e){}
+                }
+              });
+              UI.toast('✅ Khôi phục thành công! Đang tải lại...', 'success');
+              setTimeout(() => location.reload(), 1500);
+            }
+          );
+        } catch(e) {
+          UI.toast('❌ File JSON không hợp lệ!', 'error');
+        }
+      };
+      reader.readAsText(file);
+    };
+    input.click();
+  },
+
   clearAll() {
     UI.confirm('⚠️ Xóa TẤT CẢ dữ liệu?',
       'Toàn bộ dữ liệu sẽ bị xóa vĩnh viễn. Hành động này không thể hoàn tác!',
@@ -6229,7 +6059,39 @@ async function initApp() {
 
   // 17. Thông báo sẵn sàng
   setTimeout(() => {
-    UI.toast('🧠 TDA Hub sẵn sàng!', 'success', 2000);
+    UI.toast('🚀 TDA Hub sẵn sàng!', 'success', 2000);
+    // Onboarding cho lần đầu
+    const hasOnboarded = StateManager.getState('onboarded', false);
+    if (!hasOnboarded) {
+      setTimeout(() => {
+        UI.showForm('👋 Chào mừng đến TDA Hub!', `
+          <div style="font-size:14px;line-height:1.8;color:var(--text-primary)">
+            <p style="margin-bottom:12px"><strong>TDA Hub</strong> là ứng dụng quản lý cá nhân tất-cả-trong-một, chạy hoàn toàn trên trình duyệt của bạn.</p>
+            
+            <p style="font-weight:600;color:var(--accent-cyan);margin-bottom:8px">🔑 Bước 1: Thêm API Key (BẮT BUỘC để dùng AI)</p>
+            <ol style="padding-left:20px;margin-bottom:12px;font-size:13px">
+              <li>Nhấn nút <strong>⚙ Cài đặt</strong> trên thanh trên cùng</li>
+              <li>Chọn tab <strong>API Keys</strong></li>
+              <li>Chọn provider (khuyên dùng <strong>Gemini</strong> - miễn phí)</li>
+              <li>Nhấn link <strong>"🔗 Lấy API Key"</strong> → đăng ký tài khoản Google → copy key</li>
+              <li>Dán key vào → nhấn <strong>Lưu</strong> → nhấn <strong>Test</strong> kiểm tra</li>
+            </ol>
+            
+            <p style="font-weight:600;color:var(--accent-cyan);margin-bottom:8px">📱 Bước 2: Khám phá các Module</p>
+            <p style="font-size:13px;margin-bottom:12px">Nhấn vào icon các module ở ${window.innerWidth < 768 ? 'thanh dưới cùng' : 'sidebar bên trái'}: 
+            Todo ✅, Notes 📝, Lịch 📅, Tài chính 💰, Thói quen 🔄, Bookmarks 🔖, Pomodoro ⏱, Database 🗄</p>
+            
+            <p style="font-weight:600;color:var(--accent-cyan);margin-bottom:8px">🤖 Bước 3: Chat với AI</p>
+            <p style="font-size:13px">Nhấn nút <strong>🤖</strong> góc phải dưới để mở chatbot. AI có thể phân tích dữ liệu của bạn!</p>
+            
+            <div style="margin-top:16px;padding:10px;background:rgba(99,179,237,0.1);border-radius:8px;font-size:12px;color:var(--text-secondary)">
+              💡 <strong>Mẹo:</strong> Dữ liệu lưu ngay trên trình duyệt. Nhớ <strong>Export backup</strong> thường xuyên trong Cài đặt!
+            </div>
+          </div>
+        `, null);
+        StateManager.setState('onboarded', true);
+      }, 500);
+    }
   }, 500);
 
   // 18. Request notification permission (cho Pomodoro)
