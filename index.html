@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🧠 TDA Hub</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>TDA</text></svg>">
   <style>
     /* ============================================================
        CSS DESIGN SYSTEM — PROMPT 6
@@ -1411,7 +1412,94 @@
     .flex{display:flex}.flex-1{flex:1}.items-center{align-items:center}.gap-sm{gap:var(--space-sm)}
     .mt-sm{margin-top:var(--space-sm)}.mt-md{margin-top:var(--space-md)}
     .text-muted{color:var(--text-muted)}.text-sm{font-size:12px}
-  </style>
+
+    /* ============================================================
+   MODULE: POMODORO (CSS thiếu)
+   ============================================================ */
+.pomodoro-center{
+  display:flex;flex-direction:column;align-items:center;
+  gap:var(--space-lg);padding:var(--space-md) 0;
+}
+.pomodoro-ring{
+  width:200px;height:200px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.pomodoro-ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.pomodoro-ring circle{
+  fill:none;stroke-width:6;
+  stroke:var(--border);
+}
+.pomodoro-ring .progress-ring{
+  stroke:var(--accent-cyan);
+  stroke-linecap:round;
+  transition:stroke-dashoffset .5s ease;
+}
+.pomodoro-ring.break .progress-ring{stroke:var(--accent-green)}
+.pomodoro-time{text-align:center;z-index:1}
+.pomodoro-time-val{font-size:42px;font-weight:700;font-family:var(--font-mono);color:var(--text-primary)}
+.pomodoro-time-label{font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em}
+.pomodoro-controls{display:flex;gap:var(--space-md);align-items:center}
+.pomodoro-btn{
+  width:44px;height:44px;border-radius:var(--radius-full);
+  background:var(--bg-hover);border:1px solid var(--border);
+  color:var(--text-secondary);font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition-fast);cursor:pointer;
+}
+.pomodoro-btn:hover{background:var(--bg-card);color:var(--text-primary);border-color:var(--border-active)}
+.pomodoro-btn.primary{
+  width:56px;height:56px;font-size:22px;
+  background:var(--gradient-primary);color:#fff;border:none;
+  box-shadow:var(--glow-cyan);
+}
+.pomodoro-btn.primary:hover{filter:brightness(1.1);transform:scale(1.05)}
+.pomodoro-sessions{display:flex;gap:6px;align-items:center}
+.session-dot{
+  width:12px;height:12px;border-radius:50%;
+  background:var(--bg-hover);border:2px solid var(--border);
+  transition:all var(--transition-fast);
+}
+.session-dot.done{background:var(--accent-cyan);border-color:var(--accent-cyan)}
+.session-dot.active{border-color:var(--accent-yellow);background:var(--accent-yellow)}
+.pomodoro-stats{
+  display:flex;gap:var(--space-xl);text-align:center;
+  margin-top:var(--space-md);
+}
+.pom-stat-val{font-size:24px;font-weight:700;color:var(--accent-cyan)}
+.pom-stat-label{font-size:11px;color:var(--text-muted);text-transform:uppercase}
+.pom-log-item{
+  display:flex;align-items:center;gap:var(--space-sm);
+  padding:var(--space-sm) var(--space-md);
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius-md);margin-bottom:var(--space-xs);
+  font-size:13px;
+}
+
+/* ============================================================
+   MODULE: DATABASE TABLE (CSS thiếu)
+   ============================================================ */
+.db-table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius-md)}
+.db-table{width:100%;border-collapse:collapse;font-size:13px}
+.db-table th,.db-table td{
+  padding:8px 12px;border-bottom:1px solid var(--border);
+  text-align:left;white-space:nowrap;
+}
+.db-table th{
+  background:var(--bg-secondary);color:var(--text-secondary);
+  font-size:12px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.03em;position:sticky;top:0;z-index:1;
+}
+.db-table tr:hover{background:var(--bg-hover)}
+.db-table td[contenteditable]:focus{
+  outline:2px solid var(--border-active);
+  outline-offset:-2px;border-radius:2px;
+}
+.col-sort{cursor:pointer;user-select:none}
+.col-sort:hover{color:var(--accent-cyan)}
+.db-toolbar{margin-bottom:var(--space-md)}
+
+</style>
+
 </head>
 <body>
 <div id="app">
@@ -3301,7 +3389,25 @@ const TodoModule = {
   _futureDate(days) { const d=new Date(); d.setDate(d.getDate()+days); return d.toISOString().split('T')[0]; },
   _pastDate(days) { const d=new Date(); d.setDate(d.getDate()-days); return d.toISOString().split('T')[0]; },
   _save() { localStorage.setItem('module_todo', JSON.stringify(this.data)); },
-  _load() { try { return JSON.parse(localStorage.getItem('module_todo')) || []; } catch(e) { return []; } }
+  _load() { try { return JSON.parse(localStorage.getItem('module_todo')) || []; } catch(e) { return []; } },
+
+// ===== FIX: _bindDragDrop - thiếu hoàn toàn trong code gốc =====
+_bindDragDrop() {
+    const cols = document.querySelectorAll('.kanban-col-body');
+    cols.forEach(col => {
+        col.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            col.classList.add('drag-over');
+        });
+        col.addEventListener('dragleave', () => {
+            col.classList.remove('drag-over');
+        });
+        col.addEventListener('drop', (e) => {
+            e.preventDefault();
+            col.classList.remove('drag-over');
+        });
+    });
+}
 };
 
 // ===== MODULE 2: NOTES & KNOWLEDGE BASE =====
