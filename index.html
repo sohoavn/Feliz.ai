@@ -3200,7 +3200,25 @@ const TodoModule = {
   _futureDate(days) { const d=new Date(); d.setDate(d.getDate()+days); return d.toISOString().split('T')[0]; },
   _pastDate(days) { const d=new Date(); d.setDate(d.getDate()-days); return d.toISOString().split('T')[0]; },
   _save() { localStorage.setItem('module_todo', JSON.stringify(this.data)); },
-  _load() { try { return JSON.parse(localStorage.getItem('module_todo')) || []; } catch(e) { return []; } }
+  _load() { try { return JSON.parse(localStorage.getItem('module_todo')) || []; } catch(e) { return []; } },
+
+// ===== FIX: _bindDragDrop - thiếu hoàn toàn trong code gốc =====
+_bindDragDrop() {
+    const cols = document.querySelectorAll('.kanban-col-body');
+    cols.forEach(col => {
+        col.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            col.classList.add('drag-over');
+        });
+        col.addEventListener('dragleave', () => {
+            col.classList.remove('drag-over');
+        });
+        col.addEventListener('drop', (e) => {
+            e.preventDefault();
+            col.classList.remove('drag-over');
+        });
+    });
+}
 };
 
 // ===== MODULE 2: NOTES & KNOWLEDGE BASE =====
